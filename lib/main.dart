@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'repository.dart';
 import 'vanilla_screen.dart';
+import 'user_model_screen.dart';
 
 void main() {
   runApp(
@@ -36,7 +37,14 @@ class MyApp extends StatelessWidget {
                 child: Text('Vanilla'),
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserModelScreen(_repository),
+                    ),
+                  );
+                },
                 child: Text('Scoped Model'),
               ),
               RaisedButton(
