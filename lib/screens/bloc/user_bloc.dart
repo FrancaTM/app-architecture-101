@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'repository.dart';
-import 'user.dart';
+import 'package:app_architecture_101/data/repository.dart';
+import 'package:app_architecture_101/data/user.dart';
 
 class UserBloc {
   final Repository _repository;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'repository.dart';
-import 'user.dart';
+import 'package:app_architecture_101/data/repository.dart';
+import 'package:app_architecture_101/data/user.dart';
 import 'user_bloc.dart';
 
 class UserBlocScreen extends StatefulWidget {

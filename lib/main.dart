@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'repository.dart';
-import 'user_bloc_screen.dart';
-import 'vanilla_screen.dart';
-import 'user_model_screen.dart';
+import 'package:app_architecture_101/data/repository.dart';
+import 'package:app_architecture_101/screens/bloc/user_bloc_screen.dart';
+import 'package:app_architecture_101/screens/vanilla/vanilla_screen.dart';
+import 'package:app_architecture_101/screens/scoped_model/user_model_screen.dart';
 
 void main() {
   runApp(
@@ -14,11 +14,27 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Repository _repository = Repository();
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'App Architectures',
+      home: HomePage(Repository()),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  final Repository _repository;
+
+  HomePage(this._repository);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purple.shade900,
+        title: Text('App Architectures'),
+      ),
       backgroundColor: Colors.purple,
       body: SafeArea(
         child: Center(
@@ -28,40 +44,52 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VanillaScreen(_repository),
-                    ),
-                  );
+                  _openVanilla(context);
                 },
                 child: Text('Vanilla'),
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserModelScreen(_repository),
-                    ),
-                  );
+                  _openScopedModel(context);
                 },
                 child: Text('Scoped Model'),
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserBlocScreen(_repository),
-                    ),
-                  );
+                  _openBloc(context);
                 },
                 child: Text('BLoC'),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _openVanilla(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VanillaScreen(_repository),
+      ),
+    );
+  }
+
+  void _openScopedModel(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UserModelScreen(_repository),
+      ),
+    );
+  }
+
+  void _openBloc(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UserBlocScreen(_repository),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 
-import 'repository.dart';
+import 'package:app_architecture_101/data/repository.dart';
 import 'user_model.dart';
 
 class UserModelScreen extends StatefulWidget {

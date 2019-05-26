@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'repository.dart';
-import 'user.dart';
+import 'package:app_architecture_101/data/repository.dart';
+import 'package:app_architecture_101/data/user.dart';
 
 class VanillaScreen extends StatefulWidget {
   final Repository _repository;

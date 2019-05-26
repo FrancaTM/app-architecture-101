@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 
-import 'repository.dart';
-import 'user.dart';
+import 'package:app_architecture_101/data/repository.dart';
+import 'package:app_architecture_101/data/user.dart';
 
 class UserModel extends Model {
   final Repository _repository;
