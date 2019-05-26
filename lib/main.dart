@@ -5,6 +5,10 @@ import 'package:app_architecture_101/screens/bloc/user_bloc_screen.dart';
 import 'package:app_architecture_101/screens/vanilla/vanilla_screen.dart';
 import 'package:app_architecture_101/screens/scoped_model/user_model_screen.dart';
 
+enum AppArchitecture { Vanilla, ScopedModel, Bloc }
+
+// TODO: Refactor classes' similar code
+
 void main() {
   runApp(
     MaterialApp(
@@ -28,6 +32,38 @@ class HomePage extends StatelessWidget {
 
   HomePage(this._repository);
 
+  void _openScreen(BuildContext context, AppArchitecture architectureName) {
+    Widget screen;
+    switch (architectureName) {
+      case AppArchitecture.Vanilla:
+        screen = VanillaScreen(_repository);
+        break;
+      case AppArchitecture.ScopedModel:
+        screen = UserModelScreen(_repository);
+        break;
+      case AppArchitecture.Bloc:
+        screen = UserBlocScreen(_repository);
+        break;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => screen,
+      ),
+    );
+  }
+
+  Widget _buildRaisedButton(
+      BuildContext context, AppArchitecture architectureName) {
+    return RaisedButton(
+      onPressed: () {
+        _openScreen(context, architectureName);
+      },
+      child: Text(architectureName.toString().split('.').last),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,54 +78,12 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  _openVanilla(context);
-                },
-                child: Text('Vanilla'),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  _openScopedModel(context);
-                },
-                child: Text('Scoped Model'),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  _openBloc(context);
-                },
-                child: Text('BLoC'),
-              ),
+              _buildRaisedButton(context, AppArchitecture.Vanilla),
+              _buildRaisedButton(context, AppArchitecture.ScopedModel),
+              _buildRaisedButton(context, AppArchitecture.Bloc),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void _openVanilla(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => VanillaScreen(_repository),
-      ),
-    );
-  }
-
-  void _openScopedModel(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => UserModelScreen(_repository),
-      ),
-    );
-  }
-
-  void _openBloc(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => UserBlocScreen(_repository),
       ),
     );
   }
