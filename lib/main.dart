@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'repository.dart';
+import 'user_bloc_screen.dart';
 import 'vanilla_screen.dart';
 import 'user_model_screen.dart';
 
@@ -48,7 +49,14 @@ class MyApp extends StatelessWidget {
                 child: Text('Scoped Model'),
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserBlocScreen(_repository),
+                    ),
+                  );
+                },
                 child: Text('BLoC'),
               ),
             ],
